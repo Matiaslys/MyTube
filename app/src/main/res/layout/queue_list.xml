@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<ScrollView xmlns:andriod="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    andriod:layout_width="fill_parent"
+    andriod:layout_height="fill_parent"
+    andriod:fillViewport="true">
+
+    <LinearLayout
+        andriod:layout_width="match_parent"
+        andriod:layout_height="match_parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            andriod:layout_width="match_parent"
+            andriod:layout_height="match_parent">
+
+            <Button
+                andriod:id="@+id/gå_op_knap"
+                andriod:layout_width="60dp"
+                andriod:layout_height="30dp"
+                andriod:layout_marginTop="20dp"
+                andriod:layout_marginEnd="32dp"
+                andriod:text="Button"
+                andriod:textSize="9dp"
+                app:layout_constraintEnd_toStartOf="@+id/gå_ned_knap"
+                app:layout_constraintTop_toBottomOf="@+id/sang_navn" />
+
+            <ImageView
+                andriod:id="@+id/imageView"
+                andriod:layout_width="wrap_content"
+                andriod:layout_height="wrap_content"
+                andriod:layout_marginStart="16dp"
+                andriod:layout_marginTop="16dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/ic_launcher_foreground"
+                tools:ignore="VectorDrawableCompat" />
+
+            <TextView
+                andriod:id="@+id/sang_navn"
+                andriod:layout_width="240dp"
+                andriod:layout_height="30dp"
+                andriod:layout_marginTop="16dp"
+                andriod:text="TextView"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.377"
+                app:layout_constraintStart_toEndOf="@+id/imageView"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <Button
+                andriod:id="@+id/gå_ned_knap"
+                andriod:layout_width="60dp"
+                andriod:layout_height="30dp"
+                andriod:layout_marginTop="20dp"
+                andriod:layout_marginEnd="28dp"
+                andriod:text="Button"
+                andriod:textSize="9dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/sang_navn" />
+
+            <EditText
+                andriod:id="@+id/list_nummer"
+                andriod:layout_width="83dp"
+                andriod:layout_height="33dp"
+                andriod:layout_marginStart="16dp"
+                andriod:layout_marginTop="20dp"
+                andriod:ems="10"
+                andriod:inputType="textPersonName"
+                andriod:text="Name"
+                andriod:textSize="12dp"
+                app:layout_constraintStart_toEndOf="@+id/imageView"
+                app:layout_constraintTop_toBottomOf="@+id/sang_navn" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </LinearLayout>
+</ScrollView>
