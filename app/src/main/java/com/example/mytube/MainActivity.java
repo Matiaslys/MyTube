@@ -30,8 +30,9 @@ public class MainActivity extends AppCompatActivity {
         songButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, Song_List.class);
 
-                setContentView(R.layout.activity_song__list2);
+                startActivity(intent);
             }
         });
     }
