@@ -72,6 +72,15 @@
                 app:layout_constraintStart_toEndOf="@+id/Søgning"
                 app:layout_constraintTop_toTopOf="parent" />
 
+            <ListView
+                andriod:id="@+id/listView"
+                andriod:layout_width="409dp"
+                andriod:layout_height="569dp"
+                andriod:dividerHeight="1dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent" />
+
         </androidx.constraintlayout.widget.ConstraintLayout>
     </LinearLayout>
 </ScrollView>
