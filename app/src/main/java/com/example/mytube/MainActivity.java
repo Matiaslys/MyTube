@@ -17,65 +17,66 @@ import java.util.ArrayList;
 
 
 public class MainActivity extends AppCompatActivity {
-    private Button queue_Button, songButton;
-    private ImageButton pause, previous, next;
-    private SeekBar seek_Bar;
-    private MediaPlayer mediaPlayer;
-    private int Song;
-    private ArrayList<File> mySongs;
-    private String mSongName;
-    private TextView songNameTxt;
-    private int position;
+//    private Button queue_Button, songButton;
+//    private ImageButton pause, previous, next;
+//    private SeekBar seek_Bar;
+//    private MediaPlayer mediaPlayer;
+//    private int Song;
+//    private ArrayList<File> mySongs;
+//    private String mSongName;
+//    private TextView songNameTxt;
+//    private int position;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        queue_Button = findViewById(R.id.Sang_Liste_Knap);
-        songButton = findViewById(R.id.Mine_Sange_knap);
-        seek_Bar = findViewById(R.id.seekBar);
-        pause = findViewById(R.id.pause);
-        previous = findViewById(R.id.previous);
-        next = findViewById(R.id.next);
+//        songNameTxt = findViewById(R.id.songName);
+//        queue_Button = findViewById(R.id.Sang_Liste_Knap);
+//        songButton = findViewById(R.id.Mine_Sange_knap);
+//        seek_Bar = findViewById(R.id.seekBar);
+//        pause = findViewById(R.id.pause);
+//        previous = findViewById(R.id.previous);
+//        next = findViewById(R.id.next);
 //        validateReceiveValuesAndStartPlaying();
-        pause.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
+//        pause.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
 //                playPauseSong();
-            }
-        });
-        previous.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (mediaPlayer.getCurrentPosition() > 0) {
+//            }
+//        });
+//        previous.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                if (mediaPlayer.getCurrentPosition() > 0) {
 //                    playPreviousSong();
-                }
-            }
-        });
-        next.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (mediaPlayer.getCurrentPosition() > 0) {
+//                }
+//            }
+//        });
+//        next.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                if (mediaPlayer.getCurrentPosition() > 0) {
 //                    playNextSong();
-                }
-            }
-        });
-        queue_Button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                setContentView(R.layout.queue_list);
-            }
-        });
-        songButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, Song_List.class);
-
-                startActivity(intent);
-            }
-        });
-
-
+//                }
+//            }
+//        });
+//        queue_Button.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                setContentView(R.layout.queue_list);
+//            }
+//        });
+//        songButton.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                Intent intent = new Intent(MainActivity.this, Song_List.class);
+//
+//                startActivity(intent);
+//            }
+//        });
+//
+//
 //        Bundle bundle = getIntent().getExtras();
 //        int[] songs = bundle.getIntArray("song");
 //        String[] songsNameAndArtistArray = bundle.getStringArray("SongName");
@@ -131,10 +132,10 @@ public class MainActivity extends AppCompatActivity {
 //        songNameTxt.setText(mSongName);
 //        mediaPlayer.start();
 //    }
-
-    public void onBackPressed() {
-        Intent intent = new Intent(MainActivity.this, MainActivity.class);
-
-        startActivity(intent);
-    }
+//
+//    public void onBackPressed() {
+//        Intent intent = new Intent(MainActivity.this, MainActivity.class);
+//
+//        startActivity(intent);
+//    }
 }

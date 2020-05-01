@@ -73,7 +73,7 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
             <ListView
-                andriod:id="@+id/listView"
+                andriod:id="@+id/songList"
                 andriod:layout_width="409dp"
                 andriod:layout_height="569dp"
                 andriod:dividerHeight="1dp"
