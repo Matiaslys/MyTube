@@ -15,10 +15,6 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        onstart();
-    }
-
-    public void onstart() {
         queue_Button = findViewById(R.id.Sang_Liste_Knap);
         songButton = findViewById(R.id.Mine_Sange_knap);
         queue_Button.setOnClickListener(new View.OnClickListener() {
@@ -37,10 +33,9 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
-
-
     public void onBackPressed() {
-        setContentView(R.layout.activity_main);
-        onstart();
+        Intent intent = new Intent(MainActivity.this, MainActivity.class);
+
+        startActivity(intent);
     }
 }

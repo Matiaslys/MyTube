@@ -6,8 +6,11 @@ import androidx.core.content.ContextCompat;
 
 import android.Manifest;
 import android.content.ContentResolver;
+import android.content.ContentUris;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
+import android.media.AudioManager;
+import android.media.MediaPlayer;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
@@ -17,11 +20,15 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import java.io.IOException;
 import java.util.ArrayList;
 
 public class Song_List extends AppCompatActivity {
     private static final int MY_PERMISSION_REQUEST = 1;
     ArrayList<String> arrayList;
+    MediaPlayer mediaPlayer = new MediaPlayer();
+//    ArrayList<MediaPlayer> listSongs = new ArrayList<>();
+    ArrayList<Long> list = new ArrayList<>();
     ListView listView;
     ArrayAdapter<String> adapter;
 
@@ -52,10 +59,15 @@ public class Song_List extends AppCompatActivity {
         if (songCursor != null && songCursor.moveToFirst()) {
             int songTitle = songCursor.getColumnIndex(MediaStore.Audio.Media.TITLE);
             int songArtist = songCursor.getColumnIndex(MediaStore.Audio.Media.ARTIST);
+            int idColumn = songCursor.getColumnIndex(android.provider.MediaStore.Audio.Media._ID);
             do {
+                long thisId = songCursor.getLong(idColumn);
                 String currentTitle = songCursor.getString(songTitle);
                 String currentArtist = songCursor.getString(songArtist);
                 arrayList.add(currentTitle + "\n" + currentArtist);
+                list.add(thisId);
+                // nyt
+//                listSongs.add(MediaPlayer.create(getApplicationContext(), songUri));
             } while (songCursor.moveToNext());
         }
     }
@@ -66,9 +78,39 @@ public class Song_List extends AppCompatActivity {
         getMusic();
         adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, arrayList);
         listView.setAdapter(adapter);
+        int index = 0;
+        final long[] songs = new long[list.size()];
+        for (final Long value : list) {
+            songs[index++] = value;
+        }
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                if (mediaPlayer.isPlaying()) {
+                    mediaPlayer.reset();
+                }
+                Uri contentUri = ContentUris.withAppendedId(
+                        android.provider.MediaStore.Audio.Media.EXTERNAL_CONTENT_URI, songs[i]);
+                mediaPlayer.setAudioStreamType(AudioManager.STREAM_MUSIC);
+                try {
+                    mediaPlayer.setDataSource(getApplicationContext(), contentUri);
+                    mediaPlayer.prepare();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+                mediaPlayer.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
+                    @Override
+                    public void onPrepared(MediaPlayer mp) {
+                        mediaPlayer.start();
+                    }
+                });
+                /////////////////
+//                Intent intent = new Intent(Song_List.this, MainActivity.class);
+//                startActivity(intent);
+//                listSongs.get(i).setAudioStreamType(AudioManager.STREAM_MUSIC);
+                //                    listSongs.get(i).setDataSource(getApplicationContext(), contentUri);
+//                    listSongs.get(i).prepare();
+//                listSongs.get(i).start();
                 //open music player to play desired song
             }
         });
