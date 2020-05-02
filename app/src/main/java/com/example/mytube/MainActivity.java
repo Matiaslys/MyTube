@@ -21,7 +21,6 @@ public class MainActivity extends AppCompatActivity {
     private ImageButton pause, previous, next;
     private SeekBar seek_Bar;
     private MediaPlayer mediaPlayer;
-    private int Song;
     private ArrayList<File> mySongs;
     private String mSongName;
     private TextView songNameTxt;
@@ -37,18 +36,24 @@ public class MainActivity extends AppCompatActivity {
         pause = findViewById(R.id.pause);
         previous = findViewById(R.id.previous);
         next = findViewById(R.id.next);
-//        validateReceiveValuesAndStartPlaying();
+        songNameTxt = findViewById(R.id.Sang);
+        try {
+            validateReceiveValuesAndStartPlaying();
+        } catch (Exception e) {
+
+        }
+
         pause.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                playPauseSong();
+                playPauseSong();
             }
         });
         previous.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (mediaPlayer.getCurrentPosition() > 0) {
-//                    playPreviousSong();
+                    playPreviousSong();
                 }
             }
         });
@@ -56,7 +61,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if (mediaPlayer.getCurrentPosition() > 0) {
-//                    playNextSong();
+                    playNextSong();
                 }
             }
         });
@@ -82,55 +87,55 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-//    private void validateReceiveValuesAndStartPlaying() {
-//        if (mediaPlayer != null) {
-//            mediaPlayer.stop();
-//            mediaPlayer.release();
-//        }
-//        Intent intent = getIntent();
-//        Bundle bundle = intent.getExtras();
-//        mySongs = (ArrayList) bundle.getParcelableArrayList("song");
-//        mSongName = mySongs.get(position).getName();
-//        String songName = intent.getStringExtra("name");
-//        songNameTxt.setText(songName);
-//        songNameTxt.setSelected(true);
-//        position = bundle.getInt("position", 0);
-//        Uri uri = Uri.parse(mySongs.get(position).toString());
-//        mediaPlayer = MediaPlayer.create(MainActivity.this, uri);
-//        mediaPlayer.start();
-//    }
-//
-//    private void playPauseSong() {
-//        if (mediaPlayer.isPlaying()) {
-//            mediaPlayer.pause();
-//        } else {
-//            mediaPlayer.start();
-//        }
-//    }
-//
-//    private void playNextSong() {
-//        mediaPlayer.pause();
-//        mediaPlayer.stop();
-//        mediaPlayer.release();
-//        position = ((position + 1) % mySongs.size());
-//        Uri uri = Uri.parse(mySongs.get(position).toString());
-//        mediaPlayer = MediaPlayer.create(MainActivity.this, uri);
-//        mSongName = mySongs.get(position).toString();
-//        songNameTxt.setText(mSongName);
-//        mediaPlayer.start();
-//    }
-//
-//    private void playPreviousSong() {
-//        mediaPlayer.pause();
-//        mediaPlayer.stop();
-//        mediaPlayer.release();
-//        position = ((position - 1) < 0 ? (mySongs.size() - 1) : (position - 1));
-//        Uri uri = Uri.parse(mySongs.get(position).toString());
-//        mediaPlayer = MediaPlayer.create(MainActivity.this, uri);
-//        mSongName = mySongs.get(position).toString();
-//        songNameTxt.setText(mSongName);
-//        mediaPlayer.start();
-//    }
+    private void validateReceiveValuesAndStartPlaying() {
+        if (mediaPlayer != null) {
+            mediaPlayer.stop();
+            mediaPlayer.release();
+        }
+        Intent intent = getIntent();
+        Bundle bundle = intent.getExtras();
+        mySongs = (ArrayList) bundle.getParcelableArrayList("song");
+        mSongName = mySongs.get(position).getName();
+        String songName = getIntent().getStringExtra("name");
+        songNameTxt.setText(songName);
+        songNameTxt.setSelected(true);
+        position = bundle.getInt("position", 0);
+        Uri uri = Uri.parse(mySongs.get(position).toString());
+        mediaPlayer = MediaPlayer.create(MainActivity.this, uri);
+        mediaPlayer.start();
+    }
+
+    private void playPauseSong() {
+        if (mediaPlayer.isPlaying()) {
+            mediaPlayer.pause();
+        } else {
+            mediaPlayer.start();
+        }
+    }
+
+    private void playNextSong() {
+        mediaPlayer.pause();
+        mediaPlayer.stop();
+        mediaPlayer.release();
+        position = ((position + 1) % mySongs.size());
+        Uri uri = Uri.parse(mySongs.get(position).toString());
+        mediaPlayer = MediaPlayer.create(MainActivity.this, uri);
+        mSongName = mySongs.get(position).toString();
+        songNameTxt.setText(mSongName);
+        mediaPlayer.start();
+    }
+
+    private void playPreviousSong() {
+        mediaPlayer.pause();
+        mediaPlayer.stop();
+        mediaPlayer.release();
+        position = ((position - 1) < 0 ? (mySongs.size() - 1) : (position - 1));
+        Uri uri = Uri.parse(mySongs.get(position).toString());
+        mediaPlayer = MediaPlayer.create(MainActivity.this, uri);
+        mSongName = mySongs.get(position).toString();
+        songNameTxt.setText(mSongName);
+        mediaPlayer.start();
+    }
 
     public void onBackPressed() {
         Intent intent = new Intent(MainActivity.this, MainActivity.class);
