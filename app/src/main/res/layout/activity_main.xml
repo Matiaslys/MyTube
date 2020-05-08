@@ -6,16 +6,6 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
-    <VideoView
-        android:id="@+id/videoView"
-        android:layout_width="wrap_content"
-        android:layout_height="288dp"
-        android:layout_marginBottom="100dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
     <TextView
         android:id="@+id/textView"
         android:layout_width="wrap_content"
@@ -47,7 +37,7 @@
         android:layout_width="97dp"
         android:layout_height="34dp"
         android:layout_marginEnd="64dp"
-        android:layout_marginBottom="64dp"
+        android:layout_marginBottom="60dp"
         android:text="@string/Sang_liste"
         android:textSize="12sp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -57,49 +47,52 @@
         android:id="@+id/Sang"
         android:layout_width="338dp"
         android:layout_height="22dp"
-        android:layout_marginBottom="12dp"
         android:text="@string/Sang"
-        app:layout_constraintBottom_toTopOf="@+id/videoView"
+        app:layout_constraintBottom_toTopOf="@+id/pause"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.506"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.905" />
+        app:layout_constraintVertical_bias="0.666" />
 
     <ImageButton
         android:id="@+id/previous"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="48dp"
-        android:layout_marginTop="73dp"
-        android:layout_marginBottom="104dp"
+        android:layout_marginStart="60dp"
+        android:layout_marginBottom="108dp"
         app:layout_constraintBottom_toTopOf="@+id/Mine_Sange_knap"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/videoView"
         app:srcCompat="@android:drawable/ic_media_previous" />
 
     <ImageButton
         android:id="@+id/pause"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="48dp"
-        android:layout_marginBottom="172dp"
+        android:layout_marginBottom="202dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/next"
-        app:layout_constraintHorizontal_bias="0.492"
         app:layout_constraintStart_toEndOf="@+id/previous"
-        app:layout_constraintTop_toBottomOf="@+id/videoView"
         app:srcCompat="@android:drawable/ic_media_pause" />
 
     <ImageButton
         android:id="@+id/next"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="73dp"
-        android:layout_marginEnd="68dp"
-        android:layout_marginBottom="104dp"
+        android:layout_marginEnd="60dp"
+        android:layout_marginBottom="108dp"
         app:layout_constraintBottom_toTopOf="@+id/Sang_Liste_Knap"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/videoView"
         app:srcCompat="@android:drawable/ic_media_next" />
+
+    <SeekBar
+        android:id="@+id/seekBar"
+        android:layout_width="337dp"
+        android:layout_height="26dp"
+        app:layout_constraintBottom_toTopOf="@+id/pause"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/Sang"
+        app:layout_constraintVertical_bias="0.476" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
