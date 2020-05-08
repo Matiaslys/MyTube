@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.media.MediaPlayer;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
@@ -20,7 +21,7 @@ public class MainActivity extends AppCompatActivity {
     private Button queue_Button, songButton;
     private ImageButton pause, previous, next;
     private SeekBar seek_Bar;
-    private MediaPlayer mediaPlayer;
+    public static MediaPlayer mediaPlayer;
     private ArrayList<File> mySongs;
     private String mSongName;
     private TextView songNameTxt;
@@ -39,7 +40,7 @@ public class MainActivity extends AppCompatActivity {
         songNameTxt = findViewById(R.id.Sang);
         try {
             validateReceiveValuesAndStartPlaying();
-        } catch (Exception e) {
+        } catch (NullPointerException e) {
 
         }
 
@@ -80,11 +81,6 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-
-//        Bundle bundle = getIntent().getExtras();
-//        int[] songs = bundle.getIntArray("song");
-//        String[] songsNameAndArtistArray = bundle.getStringArray("SongName");
-
     }
 
     private void validateReceiveValuesAndStartPlaying() {
@@ -92,6 +88,7 @@ public class MainActivity extends AppCompatActivity {
             mediaPlayer.stop();
             mediaPlayer.release();
         }
+
         Intent intent = getIntent();
         Bundle bundle = intent.getExtras();
         mySongs = (ArrayList) bundle.getParcelableArrayList("song");
@@ -103,12 +100,66 @@ public class MainActivity extends AppCompatActivity {
         Uri uri = Uri.parse(mySongs.get(position).toString());
         mediaPlayer = MediaPlayer.create(MainActivity.this, uri);
         mediaPlayer.start();
+        seek_Bar.setMax(mediaPlayer.getDuration());
+        seekbarUpdateHandler.postDelayed(mUpdateSeekbar, 0);
+        if (seek_Bar.getMax() == mediaPlayer.getCurrentPosition()) {
+            playNextSong();
+        }
+        seek_Bar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+            @Override
+            public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+                if (fromUser) {
+                    mediaPlayer.seekTo(progress);
+                    seek_Bar.setProgress(progress);
+                }
+            }
+
+            @Override
+            public void onStartTrackingTouch(SeekBar seekBar) {
+
+            }
+
+            @Override
+            public void onStopTrackingTouch(SeekBar seekBar) {
+
+            }
+        });
+        checkbarHandler.post(CheckSeekbar);
     }
+
+    private Handler seekbarUpdateHandler = new Handler();
+    private Runnable mUpdateSeekbar = new Runnable() {
+        @Override
+        public void run() {
+            try {
+                seek_Bar.setProgress(mediaPlayer.getCurrentPosition());
+                seekbarUpdateHandler.postDelayed(this, 50);
+            } catch (Exception e) {
+
+            }
+        }
+    };
+    private Handler checkbarHandler = new Handler();
+    private Runnable CheckSeekbar = new Runnable() {
+        @Override
+        public void run() {
+            try {
+                if (mediaPlayer.getDuration() == mediaPlayer.getCurrentPosition()) {
+                    playNextSong();
+                }
+                checkbarHandler.post(this);
+            } catch (Exception e) {
+
+            }
+        }
+    };
 
     private void playPauseSong() {
         if (mediaPlayer.isPlaying()) {
+            seekbarUpdateHandler.removeCallbacks(mUpdateSeekbar);
             mediaPlayer.pause();
         } else {
+            seekbarUpdateHandler.postDelayed(mUpdateSeekbar, 0);
             mediaPlayer.start();
         }
     }
@@ -137,9 +188,4 @@ public class MainActivity extends AppCompatActivity {
         mediaPlayer.start();
     }
 
-    public void onBackPressed() {
-        Intent intent = new Intent(MainActivity.this, MainActivity.class);
-
-        startActivity(intent);
-    }
 }
